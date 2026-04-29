@@ -28,7 +28,7 @@ def register():
         cursor = conn.cursor()
 
         try:
-            # ❌ parola in clar
+            #  parola in clar
             cursor.execute(f"INSERT INTO users (username, password) VALUES ('{username}', '{password}')")
             conn.commit()
             return "User created successfully"
@@ -48,7 +48,7 @@ def login():
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # ❌ SQL INJECTION
+        #  SQL INJECTION
         query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
         user = cursor.execute(query).fetchone()
 
@@ -56,7 +56,7 @@ def login():
             session["user"] = user["username"]
             return redirect("/dashboard")
         else:
-            # ❌ user enumeration
+            #  user enumeration
             user_check = cursor.execute(f"SELECT * FROM users WHERE username = '{username}'").fetchone()
             if user_check:
                 return "Wrong password"
